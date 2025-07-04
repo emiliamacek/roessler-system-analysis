@@ -82,9 +82,11 @@ ax.plot_surface(
     color="blue",
     rstride=100,
     cstride=100,
+    label=r"Sekcja Poincarégo $\Pi$",
 )
 
-
+# ax.plot([], [], [], color="blue", alpha=0.3, label=r"Sekcja $\Pi$")
+ax.legend()
 ax.set_xlabel("x")
 ax.set_ylabel("y")
 ax.set_zlabel("z")
@@ -102,4 +104,4 @@ ax.zaxis.set_major_locator(MaxNLocator(5))
 # ax.set_ylim(-15, 10)
 plt.tight_layout()
 plt.savefig("../images/section_with_points.png", bbox_inches="tight", dpi=500)
-plt.show()
+# plt.show()
