@@ -1,41 +1,32 @@
-## Wymagania
+## Requirements
 
-Kod służący do przeprowadzenia dowodu oraz generowania danych został napisany w języku C++ i z kompilatorem g++ (GCC) w wersji 15.1.1.
-Wykorzystuje bibliotekę CAPD w wersji 6.0.0 (https://capd.ii.uj.edu.pl/), zbudowaną ze źródeł.
-Programy do generowania wykresów zostały napisane w języku Python w wersji 3.13.3.
+The code used to carry out the proof and generate the data was written in C++ using the g++ (GCC) compiler version 15.1.1.
+It utilizes the CAPD library version 6.0.0 (https://capd.ii.uj.edu.pl/), built from source.
+The scripts for generating plots were written in Python version 3.13.3.
 
-## Instrukcje odnośnie kompilacji
+## Build Instructions
 
-W pliku Makefile należy nadpisać zmienną `capdconfig` na swoją ścieżkę do biblioteki CAPD. Następnie, aby zbudować projekt należy
-w terminalu przejść do głównego folderu projektu i wywołać komendę `make`. Wówczas wszystkie pliki z `/src/` będą gotowe do uruchomienia. Odpalamy je komendą `./nazwa-programu`
+In the `Makefile`, you need to override the `capdconfig` variable with your path to the CAPD library. Next, to build the project, navigate to the main project directory in the terminal and run the `make` command. Once finished, all files from the `/src/` directory will be compiled and ready to execute. You can run them using the command `./program-name`.
 
-## Nawigacja po kodzie
+## Code Navigation
 
-- Implementacja funkcji związanych z odwzorowaniem Poincarégo oraz układem Rösslera
-
-```bash
- /src/utils.cpp
-```
-
-- Ograniczenie dolne:
+- Implementation of functions related to the Poincaré map and the Rössler system:
 
 ```bash
- /src/lower-bound.cpp
+/src/utils.cpp
 ```
-
-- Ograniczenie górne:
-
+- Lower bound:
+```bash
+/src/lower-bound.cpp
+```
+- Upper bound:
 ```bash
 /src/upper-bound.cpp
 ```
-
-- Generowanie punktów dla diagramu bifurkacyjnego:
-
+- Generating points for the bifurcation diagram:
 ```bash
 /src/poincare-bifurcation-diagram.cpp
 ```
 
-## Wydajność
-
-Wszystkie procedury zostały przetestowane na komputerze z systemem Arch Linux (kernel 6.15.2), wyposażonym w procesor AMD Ryzen 5 5600
-(6 rdzeni / 12 wątków, taktowanie do 4.47 GHz), 32 GB pamięci RAM.
+## Performance
+All procedures were tested on a machine running Arch Linux (kernel 6.15.2), equipped with an AMD Ryzen 5 5600 processor (6 cores / 12 threads, clock speed up to 4.47 GHz) and 32 GB of RAM.
