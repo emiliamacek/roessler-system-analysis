@@ -1,7 +1,7 @@
 cxx = g++
 
 # sciezka do capd
-capdconfig = /home/emilia/CAPD/build/bin/capd-config
+capdconfig ?= capd-config
 
 capdflags = $(shell ${capdconfig} --cflags)
 capdlibs = $(shell ${capdconfig} --libs)
@@ -12,7 +12,7 @@ objdir = .obj
 srcdir = src
 
 # programy
-progs = poincare-bifurcation-diagram feigenbaum upper-bound lower-bound
+progs = poincare-bifurcation-diagram upper-bound lower-bound
 # utils
 utils_obj = ${objdir}/utils.o
 
