@@ -8,9 +8,7 @@
 
 This project maps periodic windows within the Rössler system. To mitigate the compounding floating-point errors inherent in standard chaotic simulations, the environment utilizes the Interval Newton Method to rigorously prove the exact lower bounds of these windows, paired with Maximum Lyapunov Exponents to numerically estimate their upper limits.
 
-<p align="center">
-  <img src="images-preview/bifurcation-diagrams/bif-boundries.png" alt="Rössler Bifurcation Boundaries" width="800"/>
-</p>
+<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/271143f3-eb09-4343-b3e0-d2b68553cc34" />
 
 ---
 
