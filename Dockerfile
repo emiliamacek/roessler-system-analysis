@@ -15,7 +15,8 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     python3-matplotlib \
     python3-numpy \
-    python3-scipy
+    python3-scipy \
+    python3-pandas
 
 RUN git clone https://github.com/CAPDGroup/CAPD.git /opt/CAPD
 WORKDIR /opt/CAPD/build

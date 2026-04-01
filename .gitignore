@@ -40,3 +40,4 @@ poincare-bifurcation-diagram
 .dockerignore
 compile_flags.txt
 
+pyproject.toml

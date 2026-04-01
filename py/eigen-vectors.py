@@ -105,15 +105,15 @@ plot_attractor_with_vectors_ax(
     axs[0],
     P1,
     [v1_P1, v2_re_P1, v2_im_P1, v3_im_P1],
-    r"Atraktor Rösslera z wektorami własnymi $P_{1}$",
+    r"Rössler attractor with $P_{1}$'s eigen vectors",
 )
 plot_attractor_with_vectors_ax(
     "2",
     axs[1],
     P2,
     [v1_P2, v2_re_P2, v2_im_P2, v3_im_P2],
-    r"Atraktor Rösslera z wektorami własnymi $P_{2}$",
+    r"Rössler attractor with $P_{2}$'s eigen vectors",
 )
 
 plt.tight_layout()
-plt.savefig("../images/wektory-wlasne.png", bbox_inches="tight", dpi=500)
+plt.savefig("../images/eigen-vectors.png", bbox_inches="tight", dpi=500)

@@ -1,8 +1,8 @@
-import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp
+import numpy as np
+from matplotlib.ticker import FormatStrFormatter, MaxNLocator
 from mpl_toolkits.mplot3d import Axes3D
-from matplotlib.ticker import MaxNLocator, FormatStrFormatter
+from scipy.integrate import solve_ivp
 
 a = 0.2
 b = 0.2
@@ -48,10 +48,10 @@ fig = plt.figure(figsize=(10, 8))
 
 ax = fig.add_subplot(111, projection="3d")
 
-# atraktor
+# attractor
 ax.plot(x, y, z, color="gray", linewidth=0.5, alpha=0.6)
 
-# punkty przeciecia z sekcja
+# points which intersect with the section
 ax.scatter(
     x_section,
     y_section,
@@ -82,7 +82,7 @@ ax.plot_surface(
     color="blue",
     rstride=100,
     cstride=100,
-    label=r"Sekcja Poincarégo $\Pi$",
+    label=r"Poincaré section $\Pi$",
 )
 
 # ax.plot([], [], [], color="blue", alpha=0.3, label=r"Sekcja $\Pi$")

@@ -1,139 +1,147 @@
 #include "../headers/utils.hpp"
 
-static const char* menu =
-    "======================================================"
-    "====\n"
-    "|| Choose a window to measure: \n"
-    "|| 1. Window I  \n"
-    "|| 2. Window II \n"
-    "|| 3. Window III \n"
-    "======================================================"
-    "====\n";
-
-static const char* prompt = "Your choice: ";
-static const char* interlude =
-    "======================================================"
-    "====\n";
-
-void pw_lower_bound(
-    interval& lower_bound,
-    interval& left,
-    interval& right,
-    IVector& x,
-    int N,
-    interval eps,
-    int period) {
-	interval mid;
-	while ((right - left) >= eps) {
-		mid = (left + right) / interval(2.0);
-		RosslerSystem rossler(mid);
-		if (rossler.is_periodic_and_stable(x, N, period, false)) {
-			lower_bound = mid;
-			right = mid;
-		} else
-			left = mid;
-	}
+void pw_lower_bound(interval &lower_bound, interval &left, interval &right,
+                    IVector &x, int N, interval eps, int period) {
+  interval mid;
+  while ((right - left) >= eps) {
+    mid = (left + right) / interval(2.0);
+    RosslerSystem rossler(mid);
+    if (rossler.is_periodic_and_stable(x, N, period, false)) {
+      lower_bound = mid;
+      right = mid;
+    } else
+      left = mid;
+  }
 }
 
 int main() {
-	cout.precision(16);
+  std::cout.precision(16);
 
-	int N = 300;
-	interval eps = 1e-9;
+  int N = 300;
+  double eps_val = 1e-9;
 
-	try {
-		cout << boolalpha;
+  try {
+    std::cout << std::boolalpha;
+    int input;
 
-		int input;
-		do {
-			cout << menu;
-			cout << prompt;
-			cin >> input;
-			cout << '\n';
+    do {
+      std::cout
+          << "==========================================================\n";
+      std::cout << "|| RÖSSLER SYSTEM LOWER BOUND ANALYSIS \n";
+      std::cout << "|| Current Iterations (N): " << N << "\n";
+      std::cout << "|| Current Tolerance (eps): " << eps_val << "\n";
+      std::cout
+          << "==========================================================\n";
+      std::cout << "|| 1. Measure Window I   (Period 6) [4.380, 4.381]\n";
+      std::cout << "|| 2. Measure Window II  (Period 5) [4.694, 4.695]\n";
+      std::cout << "|| 3. Measure Window III (Period 3) [5.185, 5.186]\n";
+      std::cout << "|| 4. Change Iterations (N)\n";
+      std::cout << "|| 5. Change Tolerance (eps)\n";
+      std::cout << "|| 0. Exit\n";
+      std::cout
+          << "==========================================================\n";
+      std::cout << "Your choice: ";
+      std::cin >> input;
+      std::cout << '\n';
 
-			switch (input) {
-				case 1: {
-					IVector p_close_to_6_periodic(
-					    {-7.459016042357787, 0.03638246580414306});
-					double period = 6;
+      // Convert our double eps back to a strict CAPD interval for the math
+      interval eps = interval(eps_val);
 
-					interval lower_bound;
-					interval left = interval(4.38);
-					interval right = interval(4.381);
+      switch (input) {
+      case 1: {
+        IVector p_close_to_6_periodic(
+            {-7.459016042357787, 0.03638246580414306});
+        double period = 6;
+        interval lower_bound;
+        interval left = interval(4.38);
+        interval right = interval(4.381);
 
-					pw_lower_bound(
-					    lower_bound, left, right, p_close_to_6_periodic, N, eps, period);
+        std::cout << "[~] Calculating Window I... Please wait.\n";
+        pw_lower_bound(lower_bound, left, right, p_close_to_6_periodic, N, eps,
+                       period);
 
-					// check if periodic orbit exists for the lower bound
-					RosslerSystem rossler(lower_bound);
+        RosslerSystem rossler(lower_bound);
+        if (rossler.is_periodic_and_stable(p_close_to_6_periodic, N, period,
+                                           true)) {
+          std::cout << "\n[+] SUCCESS! Lower bound: " << lower_bound << "\n\n";
+        } else {
+          std::cout << "\n[-] Lower bound couldn't be established.\n\n";
+        }
+        break;
+      }
+      case 2: {
+        IVector p_close_to_5_periodic(
+            {-8.723283653276134, 0.03382484879611583});
+        double period = 5;
+        interval lower_bound;
+        interval left = interval(4.694);
+        interval right = interval(4.695);
 
-					if (rossler.is_periodic_and_stable(
-					        p_close_to_6_periodic, N, period, true)) {
-						std::cout << "Lower bound: " << lower_bound << '\n';
-					} else {
-						std::cout << "Lower bound couldn't be "
-						             "established\n";
-					}
+        std::cout << "[~] Calculating Window II... Please wait.\n";
+        pw_lower_bound(lower_bound, left, right, p_close_to_5_periodic, N, eps,
+                       period);
 
-					break;
-				};
-				case 2: {
-					IVector p_close_to_5_periodic(
-					    {-8.723283653276134, 0.03382484879611583});
+        RosslerSystem rossler(lower_bound);
+        if (rossler.is_periodic_and_stable(p_close_to_5_periodic, N, period,
+                                           true)) {
+          std::cout << "\n[+] SUCCESS! Lower bound: " << lower_bound << "\n\n";
+        } else {
+          std::cout << "\n[-] Lower bound couldn't be established.\n\n";
+        }
+        break;
+      }
+      case 3: {
+        IVector p_close_to_3_periodic(
+            {-3.562081704612412, 0.03491621098889878});
+        double period = 3;
+        interval lower_bound;
+        interval left = interval(5.185);
+        interval right = interval(5.186);
 
-					double period = 5;
+        std::cout << "[~] Calculating Window III... Please wait.\n";
+        pw_lower_bound(lower_bound, left, right, p_close_to_3_periodic, N, eps,
+                       period);
 
-					interval lower_bound;
-					interval left = interval(4.694);
-					interval right = interval(4.695);
+        RosslerSystem rossler(lower_bound);
+        if (rossler.is_periodic_and_stable(p_close_to_3_periodic, N, period,
+                                           true)) {
+          std::cout << "\n[+] SUCCESS! Lower bound: " << lower_bound << "\n\n";
+        } else {
+          std::cout << "\n[-] Lower bound couldn't be established.\n\n";
+        }
+        break;
+      }
+      case 4: {
+        std::cout << "|| Enter new number of iterations (N) [Current: " << N
+                  << "]: ";
+        std::cin >> N;
+        if (N <= 0)
+          N = 300; // Safety check
+        std::cout << "\n[+] Iterations updated to " << N << "!\n\n";
+        break;
+      }
+      case 5: {
+        std::cout << "|| Enter new tolerance (e.g., 1e-9, 1e-12) [Current: "
+                  << eps_val << "]: ";
+        std::cin >> eps_val;
+        if (eps_val <= 0)
+          eps_val = 1e-9; // Safety check
+        std::cout << "\n[+] Tolerance updated to " << eps_val << "!\n\n";
+        break;
+      }
+      case 0:
+        std::cout << "Exiting...\n";
+        break;
+      default:
+        std::cout << "[-] Invalid choice.\n\n";
+        break;
+      }
+    } while (input != 0);
 
-					pw_lower_bound(
-					    lower_bound, left, right, p_close_to_5_periodic, N, eps, period);
-
-					RosslerSystem rossler(lower_bound);
-					if (rossler.is_periodic_and_stable(
-					        p_close_to_5_periodic, N, period, true)) {
-						std::cout << "Lower bound: " << lower_bound << '\n';
-					} else {
-						std::cout << "Lower bound couldn't be "
-						             "established\n";
-					}
-
-					break;
-				}
-				case 3: {
-					IVector p_close_to_3_periodic(
-					    {-3.562081704612412, 0.03491621098889878});
-
-					double period = 3;
-
-					interval lower_bound;
-					interval left = interval(5.185);
-					interval right = interval(5.186);
-
-					pw_lower_bound(
-					    lower_bound, left, right, p_close_to_3_periodic, N, eps, period);
-
-					RosslerSystem rossler(lower_bound);
-					if (rossler.is_periodic_and_stable(
-					        p_close_to_3_periodic, N, period, true)) {
-						std::cout << "Lower bound: " << lower_bound << '\n';
-					} else {
-						std::cout << "Lower bound couldn't be "
-						             "established\n";
-					}
-
-					break;
-				}
-				default:
-					break;
-			}
-		} while (input == 1 || input == 2 || input == 3);
-
-	} catch (exception& e) {
-		cout << "\n\nException: " << e.what() << endl;
-	}
-	return 0;
+  } catch (std::exception &e) {
+    std::cout << "\n\nException: " << e.what() << std::endl;
+  }
+  return 0;
 }
 /*
 || 1. Window I

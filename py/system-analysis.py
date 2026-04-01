@@ -30,10 +30,9 @@ def eigen_data_at_point(x, y, z, a, c):
 
 def rossler_fixed_points(a: float, b: float, c: float):
     """
-    rozwiązujemy układ:
-        0 = -y - z
-        0 = x + a*y
-        0 = b + z*(x - c)
+    0 = -y - z
+    0 = x + a*y
+    0 = b + z*(x - c)
     """
 
     # z = -y  => y = -z
@@ -48,7 +47,7 @@ def rossler_fixed_points(a: float, b: float, c: float):
     D = B**2 - 4 * A * C  # delta
 
     if D < 0:
-        return []  # brak rzeczywistych punktów stałych
+        return []
 
     z1 = (-B + sqrt(D)) / (2 * A)
     z2 = (-B - sqrt(D)) / (2 * A)
@@ -70,7 +69,6 @@ def rossler_fixed_point_formulas():
     eq2 = Eq(x + a * y, 0)
     eq3 = Eq(b + z * (x - c), 0)
 
-    # rozwiązywanie symboliczne
     solutions = solve([eq1, eq2, eq3], (x, y, z), dict=True)
 
     # uproszczenie wyników
