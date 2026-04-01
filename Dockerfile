@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
     python3-scipy \
     python3-pandas
 
-RUN git clone https://github.com/CAPDGroup/CAPD.git /opt/CAPD
+RUN git clone --branch v6.0.0 --depth 1 https://github.com/CAPDGroup/CAPD.git /opt/CAPD
 WORKDIR /opt/CAPD/build
 
 # 'make install' will put capd-config in standard system paths

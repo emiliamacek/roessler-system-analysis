@@ -32,7 +32,7 @@ x, y, z = (
     sol.y[2, transient_idx:],
 )
 
-# --- sekcja Poincare'go ---
+# Poincaré section
 x_section = []
 y_section = []
 z_section = []
