@@ -18,10 +18,10 @@ This project maps periodic windows within the Rössler system. To mitigate the c
 * **Dimensionality Reduction:** Defines a Poincaré section on the half-plane $\Pi=\{x=0, y<0\}$ to reduce the 3D continuous differential equations into a 2D discrete map. This optimizes the computational tracking of periodic orbits and structures.
 * **Computer-Assisted Proofs (Lower Bounds):** Rigorously proves the existence and uniqueness of stable $p$-periodic orbits by implementing the **Interval Newton Method**. 
   * **The Mathematical Operator:** For a given candidate root $x_0$ and a surrounding interval bounding box $X$, the system computes the Interval Newton Operator: $N(x_0, X) = -[Df(X)]^{-1}f(x_0) + x_0$, where $[Df(X)]$ is the interval enclosure of the Jacobian matrix of the displacement function $f(x) = P^{p}(x) - x$ (computed as $[DP^{p}(X)] - I$).
-  * **Topological Verification:** The algorithm evaluates this operator against the initial bounding box. If the condition $N(x_0, X) \subset X$ is satisfied, it provides a strict mathematical guarantee that exactly one unique root $x^*$ exists within that box ($f(x^*) = 0$).
+  * **Topological Verification:** The algorithm evaluates this operator against the initial bounding box. If the condition $N(x_0, X) \subset X$ is satisfied, it provides a strict mathematical guarantee that exactly one unique root $x^{\*}$ exists within that box ($f(x^{\*}) = 0$).
   * **Algorithmic Implementation:** The C++ engine first uses a standard while-loop to numerically approximate the fixed point of $p$-th iterate of the Poincaré map. It then defines a strict interval box around this guess and applies the Interval Newton Operator. If the resulting interval is strictly contained within the interior of the initial box, the algorithm successfully proves the existence of the periodic orbit without any numerical ambiguity.
 ## Requirements
-- **Docker** (Handles g++ 15, OpenMP, GMP, MPFR, and compiles the CAPD 6.0.0 library from source. It also provides a fully containerized Python 3 environment with `numpy`, `scipy`, `pandas`, and `matplotlib` pre-installed for visualization).
+- **Docker** (Handles g++ 15, OpenMP, GMP, MPFR, and compiles the CAPD 6.0.0 library from source. It also provides a fully containerized Python3 environment with `numpy`, `scipy`, `pandas`, and `matplotlib` pre-installed for visualization).
 ## Build Instructions
 ##### 1. Build the Docker Image
 In the root directory of the project run:
