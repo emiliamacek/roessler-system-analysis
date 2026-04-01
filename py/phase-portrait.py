@@ -1,10 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Parametry (a się zmienia, b, c, d stałe)
 a_values = [-2, -1, 0, 0.2, 1, 2]
 
-# Siatka
 x_vals = np.linspace(-4, 4, 20)
 y_vals = np.linspace(-4, 4, 20)
 X, Y = np.meshgrid(x_vals, y_vals)

@@ -1,27 +1,48 @@
+import sys
+
 import plotter
 
-# first
-# lower_bound = 4.380026185035703
-# upper_bound = 4.39562124248497
-#
-# file_path = "../images/fpw-le.png"
-# path_x = "../output/fpw-le-a.csv"
-# path_y = "../output/fpw-le.csv"
+CONFIGS = {
+    "first": {
+        "lower_bound ": 4.380026185035703,
+        "upper_bound ": 4.39562124248497,
+        "file_path ": "../images/fpw-le.png",
+        "path_x ": "../output/fpw-le-a.csv",
+        "path_y ": "../output/fpw-le.csv",
+    },
+    "second": {
+        "lower_bound ": 4.694104184150694,
+        "upper_bound ": 4.720761523046092,
+        "file_path ": "../images/spw-le.png",
+        "path_x ": "../output/sec_pw-le-a.csv",
+        "path_y ": "../output/sec_pw-le.csv",
+    },
+    "third": {
+        "lower_bound ": 5.185404746055601,
+        "upper_bound ": 5.497374749498998,
+        "file_path ": "../images/tpw-le-1.png",
+        "path_x ": "../output/tpw-le-a.csv",
+        "path_y ": "../output/tpw-le.csv",
+    },
+}
 
-# second
-# lower_bound = 4.694104184150694
-# upper_bound = 4.720761523046092
-#
-# file_path = "../images/spw-le.png"
-# path_x = "../output/sec_pw-le-a.csv"
-# path_y = "../output/sec_pw-le.csv"
+choice = (
+    input("Which dataset would you like to plot? (first / second / third) window: ")
+    .strip()
+    .lower()
+)
 
-# third
-lower_bound = 5.185404746055601
-upper_bound = 5.497374749498998
-file_path = "../images/tpw-le-1.png"
-path_x = "../output/tpw-le-a.csv"
-path_y = "../output/tpw-le.csv"
+if choice not in CONFIGS:
+    print(f"Invalid choice '{choice}'. Please restart and select a valid option.")
+    sys.exit(1)
+
+config = CONFIGS[choice]
+file_path = config["file_path"]
+path_x = config["path_x"]
+path_y = config["path_y"]
+
+lower_bound = config.get("lower_bound")
+upper_bound = config.get("upper_bound")
 
 
 def draw_zero_line(ax):

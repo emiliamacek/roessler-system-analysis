@@ -32,7 +32,12 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-feigenbaum
 upper-bound
 lower-bound
 poincare-bifurcation-diagram
+
+.capd-headers/
+.dockerignore
+compile_flags.txt
+
+pyproject.toml
